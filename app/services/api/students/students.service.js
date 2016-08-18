@@ -5,14 +5,27 @@
 		.module('ngInterview.api.students')
 		.service('StudentsService', StudentsService);
 
-	StudentsService.$inject = [];
-	function StudentsService() {
+	StudentsService.$inject = ['$http'];
+	function StudentsService($http) {
 
 		/**
 		 * Exposed functions
 		 */
 
-		this.getName = getName; // This function serves no purpose. It's just here as an example.
+		 console.log("I get init");
+		   this.getStudents = function(id) {
+				 console.log('hit1');
+		     return $http({
+		       method: 'GET',
+		       url: 'http://il-resume-api.azurewebsites.net/api/students'
+		     }).then(function(response) {
+					 return response.data;
+				 }
+		     );
+		   };
+
+		   // OTHER FUNCTIONS
+		   // ============================================================
 
 		/**
 		 * Implementations

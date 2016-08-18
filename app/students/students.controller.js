@@ -10,22 +10,23 @@
 		 * Model
 		 */
 
-
+/* jshint validthis: true */
 		var vm = this;
+
+		vm.getStudents = getStudents;
+		vm.students = [];
 
 		/**
 		 * Initialization
 		 */
 
-		 vm.getStudents = function() {
-			 console.log('ctrl hit');
+		  function getStudents() {
 			 StudentsService.getStudents().then(function(response){
 				 console.log(response, 'response hit');
-				 var students = response.data;
+				 vm.students = response;
 			 });
 		 };
 
-		 vm.getStudents();
 
 
 		activate();
@@ -36,10 +37,8 @@
 
 		function activate() {
 			// Initialization code goes here
-			console.log('is this working?');
+			return getStudents();
 
 		}
 	}
 })();
-
-console.log("I get ran");

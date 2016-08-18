@@ -11,21 +11,10 @@
 		/**
 		 * Exposed functions
 		 */
+		 var service = this;
+		   this.getStudents = getStudents
 
-		 console.log("I get init");
-		   this.getStudents = function(id) {
-				 console.log('hit1');
-		     return $http({
-		       method: 'GET',
-		       url: 'http://il-resume-api.azurewebsites.net/api/students'
-		     }).then(function(response) {
-					 return response.data;
-				 }
-		     );
-		   };
 
-		   // OTHER FUNCTIONS
-		   // ============================================================
 
 		/**
 		 * Implementations
@@ -34,5 +23,21 @@
 		function getName() {
 			return 'studentsService';
 		}
+
+		function getStudents() {
+			return $http({
+				method: 'GET',
+				url: 'http://il-resume-api.azurewebsites.net/api/students'
+			 })
+			.then(function(response) {
+				return response.data;
+			 })
+			 .catch(function(response){
+				 if(response.status === 503){
+					 console.log('error 503!');
+					 return getStudents();
+				 }
+			 });
+		};
 	}
 })();

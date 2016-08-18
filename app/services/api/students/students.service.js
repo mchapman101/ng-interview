@@ -30,14 +30,20 @@
 				url: 'http://il-resume-api.azurewebsites.net/api/students'
 			 })
 			.then(function(response) {
-				return response.data;
+				console.log(typeof response.data);
+				if(typeof response.data != "object"){
+					return getStudents();
+				}
+				else{
+					return response.data;
+				}
+
 			 })
 			 .catch(function(response){
 				 if(response.status === 503){
-					 console.log('error 503!');
 					 return getStudents();
 				 }
 			 });
-		};
+		}
 	}
 })();

@@ -1,17 +1,28 @@
 <div class="container">
 
-<div class="row">
 
-    <h2>Students</h2>
-    <div class="list-group-item" ng-repeat="student in vm.students">
-			<div class="list-group-item-heading">
-				<h2>{{student.FirstName}} {{student.LastName}}</h2>
+    <h1>Students</h2>
+
+			<div class="row search-bar">
+	        <div class="input-group input-group-lg">
+	            <input type="text" name="search" value="" ng-model="nameFilter" class="form-control" placeholder="Search for...">
+					</div>
+	    </div>
+
+	<div class="row">
+
+    <div class="list-group-item" ng-repeat="student in vm.students | filter:nameFilter track by $index">
+
+			<div class="list-group-item-heading" ng-click="showDetails = !showDetails">
+				<h3>{{student.FirstName}} {{student.LastName}}</h3>
 			</div>
-			<dl class="dl-horizontal">
-				<h4>Favorite Color: {{student.FavoriteColor}}</h4>
-				<p>Favorite Food: {{student.FavoriteFood}}</p>
-				<p>Favorite Movie: {{student.FavoriteMovie}}</p>
-			<div>
+
+			<div ng-show="showDetails">
+				<h4><small>Favorite Color:</small> {{student.FavoriteColor}}</h5>
+				<h4><small>Favorite Food:</small> {{student.FavoriteFood}}</h5>
+				<h4><small>Favorite Movie:</small> {{student.FavoriteMovie}}</h5>
+			</div>
+
     </div>
 	</div>
 

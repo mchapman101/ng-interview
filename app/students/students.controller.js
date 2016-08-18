@@ -1,17 +1,14 @@
 (function() {
 	'use strict';
-	console.log("But I get ran");
 	angular
-		.module('ngInterview.students', [])
+		.module('ngInterview.students')
 		.controller('StudentsController', StudentsController);
-		console.log("Still ran");
-	StudentsController.$inject = [];
-	function StudentsController() {
+	StudentsController.$inject = ['StudentsService'];
+	function StudentsController(StudentsService) {
 
 		/**
 		 * Model
 		 */
-console.log("I get init");
 
 
 		var vm = this;
